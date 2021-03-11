@@ -12,14 +12,30 @@ const config =  {
     measurementId: "G-11NB3DQ2CR"
   };
 
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
-  export const auth = firebase.auth();
-  export const firestore = firebase.firestore();
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
-  const provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({prompt: 'select_account'});
+export const createUserProfile = async(userAuth, additionalData) =>{
+  if(!userAuth)return;
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapshot = await userRef.get();
 
-  export const signInWithGoogle = () => auth.signInWithPopup(provider);
+  if(snapshot.exists) return;
+  const {displayName, email} = userAuth;
+  const createAt = new Date();
+  try {
+    await userRef.set({displayName, email, createAt,...additionalData});
+  } catch (error) {
+    console.error('Error while creating user profile!!', error.message);
+  }
+  return userRef;
+}
 
-  export default firebase;
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({prompt: 'select_account'});
+
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export default firebase;

@@ -1,7 +1,7 @@
 import './custom-button.style.scss';
 
-export default function CustomButton({children,...otherProps}){
+export default function CustomButton({children, isGoogleSignIn,...otherProps}){
     return (
-        <button className='custom-button' {...otherProps}>{children}</button>
+        <button className={`${isGoogleSignIn? 'google-signin': ''} custom-button`} {...otherProps}>{children}</button>
     );
 }
