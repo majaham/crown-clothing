@@ -1,10 +1,6 @@
 import { actionTypes } from "../action-types";
 
-const INITIAL_STATE = {
-    currentUser: null
-};
-
-const userReducer = (state = INITIAL_STATE, action) =>{
+const userReducer = (state = {currentUser: null}, action) =>{
     switch(action.type){
         case actionTypes.SET_CURRENT_USER: 
         return{
