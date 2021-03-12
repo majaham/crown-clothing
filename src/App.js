@@ -10,6 +10,8 @@ import {auth, createUserProfile} from './firebase/firebase.utils';
 import SigninSignoutPage from './pages/signIn-signOut/signIn-signOut.component';
 import { connect } from 'react-redux';
 
+import CheckOutPage from './pages/checkout/checkout.component';
+
 class App extends React.Component{
   unsubscribeAuth = null;
   unsubscribeSnapShot = null;
@@ -41,6 +43,7 @@ class App extends React.Component{
         <Switch>
           <Route exact path='/' component={HomePage}/>
           <Route path='/shop' component={ShopPage}/>
+          <Route exact path='/checkout' component={CheckOutPage}/>
           <Route exact path='/signin' 
             render={() => this.props.currentUser? (<Redirect to='/'/>): (<SigninSignoutPage/>)}/>
         </Switch>
