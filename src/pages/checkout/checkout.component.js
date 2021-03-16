@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import { selectCartItems, selectCartItemsTotal } from '../../components/redux/cart/cart-selector';
+import StripeCheckoutButton from '../../components/stripe-checkout/stripe-checkout.component';
 import './checkout.style.scss';
 
 function CheckOutPage(props){
@@ -18,6 +19,12 @@ function CheckOutPage(props){
                 cartItems.map(item => <CheckoutItem key={item.id} cartItem={item}/>)
             }
             <div className='total'>TOTAL PRICE: ${totalPrice}</div>
+            <StripeCheckoutButton price={totalPrice}/>
+            <div className='test-warning'>
+                *Please use the following card details for test payments*
+                <br/>
+                4242 4242 4242 4242 - Exp: Future date - CVV: 123
+            </div>           
         </div>
     );
 }
