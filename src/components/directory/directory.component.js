@@ -5,16 +5,16 @@ import { selectDirectorySections } from '../redux/directory/directory-selector';
 import './directory.style.scss';
 
 function Directory(props) {
-    const {sections} = props;
+    const {sections} = props;   
     return <div className='directory-menu'>
         {
-            sections.map(({title, imageUrl, size, id}) => {
-                return <MenuItem key = {id} title={title} imageUrl = {imageUrl} size={size}/>
-            })
+            sections.map(({title, imageUrl, size, id, linkUrl}) => 
+                     <MenuItem key = {id} title={title} imageUrl={imageUrl}
+                        size={size} linkUrl={linkUrl}/>)
         }
     </div>     
 }
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   //sections: state.directory.sections
   sections: selectDirectorySections(state)
 });
