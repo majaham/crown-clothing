@@ -16,7 +16,7 @@ function StripeCheckoutButton(props){
         }).then(response => {
             alert('Payment was successful');
         }).catch(err => {
-            console.log('Payment error: ', JSON.parse(err));
+            console.log('Payment error: ', err);
             alert('Payment did not success, check your credit card details');
         });
     }
