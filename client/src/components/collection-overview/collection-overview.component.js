@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import CollectionPreview from '../collection-preview/collection-preview.component';
+import { selectCollectionForPreview } from '../redux/shop/shop-selector';
 import './collection-overview.style.scss';
 
 function CollectionOverview(props){
     const {collections} = props;
+   
     return (
         <div className='collection-overview'>
            { 
@@ -16,6 +18,6 @@ function CollectionOverview(props){
 }
 
 const mapStateToProps = state => ({
-    collections: state.shop.collections
+    collections: selectCollectionForPreview(state)
 });
 export default connect(mapStateToProps)(CollectionOverview);

@@ -6,7 +6,7 @@ import './App.css'
 import ShopPage from './pages/shop/shop.component';
 import HomePage from './pages/homepage/homepage.component';
 import Header from './components/header/header.component';
-import {auth, createUserProfile} from './firebase/firebase.utils';
+import {auth, createUserProfile, addCollectionAndDocuments} from './firebase/firebase.utils';
 import SigninSignoutPage from './pages/signIn-signOut/signIn-signOut.component';
 import { connect } from 'react-redux';
 
@@ -28,7 +28,8 @@ class App extends React.Component{
           });         
         });         
       }
-      this.props.setCurrentUser(userAuth);       
+      this.props.setCurrentUser(userAuth);  
+      // addCollectionAndDocuments('collections', this.props.collectionArray);     
     });
    
   }
@@ -51,8 +52,9 @@ class App extends React.Component{
     );
   }
 }
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
+const mapStateToProps = ({user, shop}) => ({
+  currentUser: user.currentUser,
+  // collectionArray: shop.collections
 });
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
